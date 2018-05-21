@@ -1,0 +1,14 @@
+.create-project {
+	.standard-paper {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.stepper-content {
+		flex: 1;
+	}
+
+	.stepper-footer {
+		text-align: right;
+	}
+}

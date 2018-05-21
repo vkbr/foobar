@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import Sidebar from '../components/Sidebar';
-import Project from '../components/Project';
+import Content from './Content';
 import { openCreateProject } from '../reducers/ui';
 
 import './App.scss';
@@ -11,7 +11,7 @@ import './App.scss';
 const App = ({ isLoaded, openCreateProject, uiMode }) => (
 	<div className="app">
 		<Sidebar openCreateProject={openCreateProject} />
-		<Project />
+		<Content />
 	</div>
 );
 
