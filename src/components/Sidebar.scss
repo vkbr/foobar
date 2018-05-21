@@ -1,0 +1,27 @@
+@import "../styles/theme";
+
+.sidebar {
+	background: white;
+	box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1), 0 0 10px 0 rgba(0, 0, 0, 0.1);
+	
+	width: 250px;
+
+	display: flex;
+	flex-direction: column;
+}
+
+.sidebar-heading {
+	margin: 0;
+	padding: 20px;
+	font-size: 1.4em;
+	
+	display: flex;
+	
+	color: $primary-color;
+
+	&__text {
+		display: inline-block;
+		flex: 1;
+		align-self: center;
+	}
+}

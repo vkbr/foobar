@@ -16,6 +16,8 @@
 	"license": "ISC",
 	"homepage": "https://github.com/vkbr/tki",
 	"dependencies": {
+		"@material-ui/core": "^1.0.0",
+		"@material-ui/icons": "^1.0.0",
 		"react": "^16.3.2",
 		"react-dom": "^16.3.2",
 		"react-redux": "^5.0.7",

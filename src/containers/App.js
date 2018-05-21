@@ -2,28 +2,25 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import Previewer from '../components/Previewer';
-import FileLoader from '../components/FileLoader';
-import Toolbox from '../components/Toolbox';
-import { initProject } from '../reducers/projects';
+import Sidebar from '../components/Sidebar';
+import Project from '../components/Project';
+import { openCreateProject } from '../reducers/ui';
 
 import './App.scss';
 
-const App = ({ isLoaded }) => (
+const App = ({ isLoaded, openCreateProject, uiMode }) => (
 	<div className="app">
-		{console.log({ isLoaded })}
-		{isLoaded ? <Previewer /> : <FileLoader />}
-		<Toolbox />
+		<Sidebar openCreateProject={openCreateProject} />
+		<Project />
 	</div>
 );
 
 const mapStateToProps = state => ({
-	isLoaded: state.projects.isLoaded,
+	uiMode: state.ui.mode,
 });
 
-const mapDispatchToProps = (dispatch) => {
-	dispatch(initProject());
-	return bindActionCreators({}, dispatch);
-};
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+	openCreateProject
+}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

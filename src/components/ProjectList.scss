@@ -1,0 +1,19 @@
+@import "../styles/theme";
+
+.project-list {
+	flex: 1;
+	position: relative;
+	overflow: auto;
+
+	&.empty-list {
+		align-items: center;
+		display: flex;
+	}
+}
+
+.no-project-info {
+	color: $text-color-light;
+	font-weight: bold;
+	padding: 0 20px;
+	font-size: 1.1em;
+}
