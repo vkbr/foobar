@@ -1,3 +1,7 @@
-export default function(state = {}, action) {
-	return state;
-}
+import { combineReducers } from 'redux';
+
+import projects from './projects';
+
+export default combineReducers({
+	projects,
+});
