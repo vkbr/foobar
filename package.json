@@ -1,0 +1,37 @@
+{
+	"name": "tiki-app",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "./node_modules/.bin/electron .",
+		"build:dev": "./node_modules/.bin/webpack --watch"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+ssh://git@bitbucket.org/vivek-brohma/tiki-app.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"homepage": "https://github.com/vkbr/tki",
+	"dependencies": {
+		"react": "^16.3.2",
+		"react-dom": "^16.3.2",
+		"react-redux": "^5.0.7",
+		"redux": "^4.0.0"
+	},
+	"devDependencies": {
+		"babel-core": "^6.26.3",
+		"babel-loader": "^7.1.4",
+		"babel-preset-react": "^6.24.1",
+		"css-loader": "^0.28.11",
+		"electron": "^2.0.1",
+		"html-webpack-plugin": "^3.2.0",
+		"mini-css-extract-plugin": "^0.4.0",
+		"node-sass": "^4.9.0",
+		"sass-loader": "^7.0.1",
+		"webpack": "^4.8.3",
+		"webpack-cli": "^2.1.3"
+	}
+}
