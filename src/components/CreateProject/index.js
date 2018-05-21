@@ -20,6 +20,8 @@ class CreateProject extends Component {
 	}
 	render() {
 		const { tempCreateProjectData, updateTempProjectData } = this.props;
+		const { step } = this.state;
+
 		return (
 			<ContentWrapper wrapperClassName="create-project" heading="Create New Project">
 				<Paper className="standard-paper">
@@ -34,18 +36,30 @@ class CreateProject extends Component {
 					</Stepper>
 
 					<div className="stepper-content">
-						<StepSetup
-							tempCreateProjectData={tempCreateProjectData}
-							updateTempProjectData={updateTempProjectData}
-						/>
+						{
+							[
+								<StepSetup
+									tempCreateProjectData={tempCreateProjectData}
+									updateTempProjectData={updateTempProjectData}
+								/>,
+								"Hello"
+							][this.state.step]
+						}
 					</div>
 
 					<div className="stepper-footer">
+						{
+							step !== 0 &&
+							<Button
+								style={{marginRight: 20}}
+								onClick={() => this.setState({ step: step - 1 })}
+							>Previous</Button>
+						}
 						<Button
 							variant="raised"
 							color="primary"
-							disabled={this.state.step === steps.length - 1}
-							onClick={() => this.setState({ step: this.state.step + 1 })}
+							disabled={step === steps.length - 1}
+							onClick={() => this.setState({ step: step + 1 })}
 						>Next</Button>
 					</div>
 

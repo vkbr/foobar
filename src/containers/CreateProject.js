@@ -3,10 +3,10 @@ import { bindActionCreators } from 'redux';
 
 import CreateProject from '../components/CreateProject';
 
-import { updateTempProjectData } from '../reducers/ui';
+import { updateTempProjectData } from '../reducers/projects';
 
 const mapStateToProps = state => ({
-	tempCreateProjectData: state.ui.tempCreateProjectData,
+	tempCreateProjectData: state.projects.tempCreateProjectData,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
