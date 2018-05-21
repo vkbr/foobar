@@ -41,7 +41,12 @@ class CreateProject extends Component {
 					</div>
 
 					<div className="stepper-footer">
-						<Button>Next</Button>
+						<Button
+							variant="raised"
+							color="primary"
+							disabled={this.state.step === steps.length - 1}
+							onClick={() => this.setState({ step: this.state.step + 1 })}
+						>Next</Button>
 					</div>
 
 				</Paper>
