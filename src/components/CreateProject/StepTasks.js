@@ -54,7 +54,7 @@ class StepTasks extends PureComponent {
 					{
 						!tempCreateProjectData.isFetchingTaskSuggestions && tempCreateProjectData.tasksSuggestion &&
 							tempCreateProjectData.tasksSuggestion.map(({ id, name, cmd, selected }) => (
-								<TaskItem selectable selected={selected} name={name} cmd={name} key={id}  />
+								<TaskItem selectable selected={selected} name={name} cmd={cmd} key={id}  />
 							))
 					}
 				</div>
