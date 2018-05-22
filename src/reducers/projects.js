@@ -35,6 +35,7 @@ function reducer(state = initialState, action) {
 				...state,
 				tempCreateProjectData: {
 					...state.tempCreateProjectData,
+					tasksSuggestion: [],
 					isFetchingTaskSuggestions: true,
 				},
 			};
@@ -43,7 +44,10 @@ function reducer(state = initialState, action) {
 				...state,
 				tempCreateProjectData: {
 					...state.tempCreateProjectData,
-					tasksSuggestion: action.tasks,
+					tasksSuggestion: [
+						...action.tasks,
+						...state.tempCreateProjectData.tasksSuggestion
+					],
 					isFetchingTaskSuggestions: false,
 				},
 			};
@@ -106,6 +110,7 @@ export const updateTempProjectData = data => async dispatch => {
 							id: uuidv4(),
 							name: taskName,
 							cmd: scripts[taskName],
+							selected: false,
 						},
 					],
 					[]
@@ -121,3 +126,8 @@ export const updateTempProjectData = data => async dispatch => {
 		}
 	}
 };
+
+export const addProjectTaskSuggestion = task => ({
+	type: UPDATE_TASK_SUGGESTION,
+	tasks: [task],
+});

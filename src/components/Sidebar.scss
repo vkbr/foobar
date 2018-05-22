@@ -8,6 +8,10 @@
 
 	display: flex;
 	flex-direction: column;
+
+	.add-project {
+		transition: transform 0.2s ease-out;
+	}
 }
 
 .sidebar-heading {

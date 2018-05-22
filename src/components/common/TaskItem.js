@@ -5,7 +5,7 @@ import './TaskItem.scss';
 
 class TaskItem extends PureComponent {
 	state = {
-		isSelected: false,
+		isSelected: this.props.selected || false,
 	};
 
 	handleSelect() {

@@ -2,25 +2,16 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import Sidebar from '../components/Sidebar';
+import Sidebar from './Sidebar';
 import Content from './Content';
-import { openCreateProject } from '../reducers/ui';
 
 import './App.scss';
 
-const App = ({ isLoaded, openCreateProject, uiMode }) => (
+const App = () => (
 	<div className="app">
-		<Sidebar openCreateProject={openCreateProject} />
+		<Sidebar />
 		<Content />
 	</div>
 );
 
-const mapStateToProps = state => ({
-	uiMode: state.ui.mode,
-});
-
-const mapDispatchToProps = (dispatch) => bindActionCreators({
-	openCreateProject
-}, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

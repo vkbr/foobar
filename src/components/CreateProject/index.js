@@ -20,7 +20,11 @@ class CreateProject extends Component {
 		step: 0,
 	}
 	render() {
-		const { tempCreateProjectData, updateTempProjectData } = this.props;
+		const {
+			addProjectTaskSuggestion,
+			tempCreateProjectData,
+			updateTempProjectData,
+		} = this.props;
 		const { step } = this.state;
 
 		return (
@@ -44,6 +48,7 @@ class CreateProject extends Component {
 									updateTempProjectData={updateTempProjectData}
 								/>,
 								<StepTasks
+									addProjectTaskSuggestion={addProjectTaskSuggestion}
 									tempCreateProjectData={tempCreateProjectData}
 								/>,
 							][this.state.step]

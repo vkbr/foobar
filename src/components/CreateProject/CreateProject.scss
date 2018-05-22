@@ -29,3 +29,10 @@
 		margin: $spacing-normal 0 0 $spacing-normal ;
 	}
 }
+
+.new-task-form {
+	width: 200px;
+	padding: $spacing-normal;
+	background: $highlight-color;
+	border: 1px solid $border-color;
+}

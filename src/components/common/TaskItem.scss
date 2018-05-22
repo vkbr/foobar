@@ -5,6 +5,7 @@
 	border: 2px solid $border-color;
 	background: $background-color;
 	position: relative;
+	cursor: pointer;
 
 	&:hover {
 		border-color: $primary-color;
