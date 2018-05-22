@@ -14,7 +14,7 @@ let projects = [];
 
 try {
 	projects = JSON.parse(allProjectsSaved);
-} catch(e) {}
+} catch (e) {}
 
 const initialState = {
 	list: projects,
@@ -23,8 +23,8 @@ const initialState = {
 		pwd: '',
 		projectName: '',
 		isFetchingTaskSuggestions: false,
-		tasksSuggestion: []
-	}
+		tasksSuggestion: [],
+	},
 };
 
 function reducer(state = initialState, action) {
@@ -35,7 +35,7 @@ function reducer(state = initialState, action) {
 				tempCreateProjectData: {
 					...state.tempCreateProjectData,
 					isFetchingTaskSuggestions: true,
-				}
+				},
 			};
 		case UPDATE_TASK_SUGGESTION:
 			return {
@@ -44,14 +44,14 @@ function reducer(state = initialState, action) {
 					...state.tempCreateProjectData,
 					tasksSuggestion: action.tasks,
 					isFetchingTaskSuggestions: false,
-				}
+				},
 			};
 		case UPDATE_PROJECT_TEMP_DATA:
 			const extraPolatedData = {};
 			const pwd = action.data.pwd;
 
 			if (pwd !== undefined) {
-				const folderName = pwd[0].split('\/').slice(-1)[0];
+				const folderName = pwd[0].split('/').slice(-1)[0];
 				extraPolatedData.projectName = folderName
 					.replace(/[^a-zA-Z\d]+/g, ' ')
 					.replace(/^[a-zA-Z]/, $1 => $1.toUpperCase());
@@ -63,7 +63,7 @@ function reducer(state = initialState, action) {
 					...state.tempCreateProjectData,
 					...action.data,
 					...extraPolatedData,
-				}
+				},
 			};
 		default:
 			return state;
@@ -72,13 +72,13 @@ function reducer(state = initialState, action) {
 
 export default reducer;
 
-export const initProject = () => async (dispatch) => {
+export const initProject = () => async dispatch => {
 	setTimeout(() => {
 		dispatch({
-			type: INIT_PROJECT
+			type: INIT_PROJECT,
 		});
 	}, 2000);
-}
+};
 
 export const updateTempProjectData = data => async dispatch => {
 	dispatch({
@@ -93,25 +93,21 @@ export const updateTempProjectData = data => async dispatch => {
 	if (pwd !== undefined) {
 		try {
 			const packagePath = path.join(pwd[0], 'package.json');
-			const stat = await fs.stat(packagePath);
-			const fd = await fs.open(packagePath, 'r');
+			const packageContent = await fs.readFile(packagePath, 'utf8');
 
-			const buff = new Buffer(stat.size);
-			fs.read(fd, buff, 0, stat.size, null);
-
-			console.log(buff.toString('ascii'));
-			const json = JSON.parse(buff.toString('utf8'));
-			const scripts = json.scripts;
-			console.log({ json });
+			const { scripts } = JSON.parse(packageContent);
 
 			if (scripts) {
-				const tasks = Object.keys(scripts).reduce((prev, taskName) => [
-					...prev,
-					{
-						name: taskName,
-						cmd: scripts[taskName],
-					}
-				], []);
+				const tasks = Object.keys(scripts).reduce(
+					(prev, taskName) => [
+						...prev,
+						{
+							name: taskName,
+							cmd: scripts[taskName],
+						},
+					],
+					[]
+				);
 
 				dispatch({
 					type: UPDATE_TASK_SUGGESTION,
@@ -122,4 +118,4 @@ export const updateTempProjectData = data => async dispatch => {
 			console.error('[FATAL]', e);
 		}
 	}
-}
+};
