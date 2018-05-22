@@ -24,16 +24,12 @@ const StepSetup = ({ updateTempProjectData, tempCreateProjectData }) => (
 					</IconButton>
 				}
 			/>
-
-			{
-				tempCreateProjectData.pwd &&
-					<TextField
-						label="Give project a name"
-						value={tempCreateProjectData.projectName}
-						style={{marginTop: 20, width: '100%'}}
-						onChange={e => updateTempProjectData({ projectName: e.target.value })}
-					/>
-			}
+			<TextField
+				label="Give project a name"
+				value={tempCreateProjectData.projectName}
+				style={{marginTop: 20, width: '100%'}}
+				onChange={e => updateTempProjectData({ projectName: e.target.value })}
+			/>
 	</Fragment>
 );
 

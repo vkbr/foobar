@@ -1,7 +1,8 @@
 // import fs from 'fs';
-import fs from '../utils/fs-promise';
+import uuidv4 from 'uuid/v4';
 import path from 'path';
 // import os from 'os';
+import fs from '../utils/fs-promise';
 
 const INIT_PROJECT = 'PRO/INIT';
 const UPDATE_PROJECT_TEMP_DATA = 'PRO/PROJECT/UPDATE_TEMP_DATA';
@@ -102,6 +103,7 @@ export const updateTempProjectData = data => async dispatch => {
 					(prev, taskName) => [
 						...prev,
 						{
+							id: uuidv4(),
 							name: taskName,
 							cmd: scripts[taskName],
 						},

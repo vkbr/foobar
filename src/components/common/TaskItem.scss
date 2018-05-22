@@ -1,0 +1,33 @@
+@import "../../styles/theme";
+
+.task-item {
+	width: 150px;
+	border: 2px solid $border-color;
+	background: $background-color;
+	position: relative;
+
+	&:hover {
+		border-color: $primary-color;
+	}
+	&.selected {
+		transform: scale3d(0.95,0.95,0.95) !important;
+		border-color: $primary-color;
+		border-radius: 4px;
+	}
+	h3 {
+		padding: $spacing-normal;
+	}
+	> div {
+		padding: 0 $spacing-normal $spacing-normal;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		background: $background-color;
+		position: relative;
+
+		&:hover {
+			overflow: visible;
+			z-index: 1;
+		}
+	}
+}

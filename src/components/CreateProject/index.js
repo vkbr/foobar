@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 
 import ContentWrapper from '../ContentWrapper';
 import StepSetup from './StepSetup';
+import StepTasks from './StepTasks';
 import './CreateProject.scss';
 
 const steps = [
@@ -25,7 +26,7 @@ class CreateProject extends Component {
 		return (
 			<ContentWrapper wrapperClassName="create-project" heading="Create New Project">
 				<Paper className="standard-paper">
-					<Stepper activeStep={this.state.step}>
+					<Stepper className="stepper-head" activeStep={this.state.step} style={{ position: 'sticky', top: 0 }}>
 						{
 							steps.map(step => (
 								<Step key={step.label}>
@@ -42,7 +43,9 @@ class CreateProject extends Component {
 									tempCreateProjectData={tempCreateProjectData}
 									updateTempProjectData={updateTempProjectData}
 								/>,
-								"Hello"
+								<StepTasks
+									tempCreateProjectData={tempCreateProjectData}
+								/>,
 							][this.state.step]
 						}
 					</div>
