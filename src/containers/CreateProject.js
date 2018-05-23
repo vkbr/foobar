@@ -3,7 +3,11 @@ import { bindActionCreators } from 'redux';
 
 import CreateProject from '../components/CreateProject';
 
-import { updateTempProjectData, addProjectTaskSuggestion } from '../reducers/projects';
+import {
+	addProjectTaskSuggestion,
+	toggleSuggestedTaskSelection,
+	updateTempProjectData,
+} from '../reducers/projects';
 
 const mapStateToProps = state => ({
 	tempCreateProjectData: state.projects.tempCreateProjectData,
@@ -11,6 +15,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
 	addProjectTaskSuggestion,
+	toggleSuggestedTaskSelection,
 	updateTempProjectData,
 }, dispatch);
 

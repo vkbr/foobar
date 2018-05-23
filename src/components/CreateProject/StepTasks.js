@@ -18,7 +18,11 @@ class StepTasks extends PureComponent {
 		});
 	}
 	render() {
-		const { addProjectTaskSuggestion, tempCreateProjectData } = this.props;
+		const {
+			addProjectTaskSuggestion,
+			toggleSuggestedTaskSelection,
+			tempCreateProjectData,
+		} = this.props;
 
 		return (
 			<Fragment>
@@ -41,6 +45,11 @@ class StepTasks extends PureComponent {
 							style={{ marginTop: 20, float: 'right'}}
 							onClick={() => {
 								const { name, cmd } = this.state;
+
+								if (cmd === '') {
+									return;
+								}
+
 								addProjectTaskSuggestion({
 									name,
 									cmd,
@@ -52,10 +61,18 @@ class StepTasks extends PureComponent {
 						>Add</Button>
 					</div>
 					{
-						!tempCreateProjectData.isFetchingTaskSuggestions && tempCreateProjectData.tasksSuggestion &&
-							tempCreateProjectData.tasksSuggestion.map(({ id, name, cmd, selected }) => (
-								<TaskItem selectable selected={selected} name={name} cmd={cmd} key={id}  />
-							))
+						!tempCreateProjectData.isFetchingTaskSuggestions &&
+						tempCreateProjectData.tasksSuggestion &&
+						tempCreateProjectData.tasksSuggestion.map(({ id, name, cmd, selected }) => (
+							<TaskItem
+								selectable
+								key={id}
+								selected={selected}
+								name={name}
+								cmd={cmd}
+								onSelectChange={() => toggleSuggestedTaskSelection(id)}
+							/>
+						))
 					}
 				</div>
 			</Fragment>

@@ -6,6 +6,7 @@
 	background: $background-color;
 	position: relative;
 	cursor: pointer;
+	transition: transform 0.2s ease-out;
 
 	&:hover {
 		border-color: $primary-color;

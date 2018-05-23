@@ -4,18 +4,17 @@ import AnimZoomIn from './AnimZoomIn';
 import './TaskItem.scss';
 
 class TaskItem extends PureComponent {
-	state = {
-		isSelected: this.props.selected || false,
-	};
 
 	handleSelect() {
+		const {
+			onSelectChange,
+		} = this.props;
+
 		if (!this.props.selectable) {
 			return false;
 		}
 
-		this.setState({
-			isSelected: !this.state.isSelected,
-		});
+		onSelectChange && onSelectChange();
 	}
 
 	render() {
@@ -23,11 +22,13 @@ class TaskItem extends PureComponent {
 
 		return (
 			<AnimZoomIn
-				className={`task-item ${this.state.isSelected ? 'selected' : ''}`}
+				className="task-item-anim"
 				onClick={() => this.handleSelect()}
 			>
-				<h3>{name}</h3>
-				<div>{cmd}</div>
+				<div className={`task-item ${this.props.selected ? 'selected' : ''}`}>
+					<h3>{name}</h3>
+					<div>{cmd}</div>
+				</div>
 			</AnimZoomIn>
 		)
 	}

@@ -23,6 +23,7 @@ class CreateProject extends Component {
 		const {
 			addProjectTaskSuggestion,
 			tempCreateProjectData,
+			toggleSuggestedTaskSelection,
 			updateTempProjectData,
 		} = this.props;
 		const { step } = this.state;
@@ -49,6 +50,7 @@ class CreateProject extends Component {
 								/>,
 								<StepTasks
 									addProjectTaskSuggestion={addProjectTaskSuggestion}
+									toggleSuggestedTaskSelection={toggleSuggestedTaskSelection}
 									tempCreateProjectData={tempCreateProjectData}
 								/>,
 							][this.state.step]

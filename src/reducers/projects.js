@@ -7,6 +7,7 @@ import fs from '../utils/fs-promise';
 const INIT_PROJECT = 'PRO/INIT';
 const UPDATE_PROJECT_TEMP_DATA = 'PRO/PROJECT/UPDATE_TEMP_DATA';
 const UPDATE_TASK_SUGGESTION = 'PRO/PROJECT/UPDATE_TASK_SUGG';
+const UPDATE_TASK_SUGGESTION_SELECTION = 'PRO/PROJECT/UPDATE_TASK_SUGG_SEL';
 const FETCH_TASK_SUGGESTION = 'PRO/PROJECT/FETCH_TASK_SUGG';
 const PROJECT_PATH = 'project.json';
 
@@ -30,6 +31,20 @@ const initialState = {
 
 function reducer(state = initialState, action) {
 	switch (action.type) {
+		case UPDATE_TASK_SUGGESTION_SELECTION: {
+			const { tempCreateProjectData } = state;
+			return {
+				...state,
+				tempCreateProjectData: {
+					...tempCreateProjectData,
+					tasksSuggestion: tempCreateProjectData
+						.tasksSuggestion
+						.map(task => task.id === action.taskId ?
+							{...task, selected: !task.selected} :
+							task)
+				}
+			};
+		}
 		case FETCH_TASK_SUGGESTION:
 			return {
 				...state,
@@ -130,4 +145,9 @@ export const updateTempProjectData = data => async dispatch => {
 export const addProjectTaskSuggestion = task => ({
 	type: UPDATE_TASK_SUGGESTION,
 	tasks: [task],
+});
+
+export const toggleSuggestedTaskSelection = taskId => ({
+	type: UPDATE_TASK_SUGGESTION_SELECTION,
+	taskId
 });
