@@ -11,6 +11,7 @@ module.exports = {
 		filename: '[name].js',
 		publicPath: path.resolve('./electron-build'),
 	},
+	devtool: 'eval',
 	mode: 'development',
 	target: 'electron-main',
 	module: {
