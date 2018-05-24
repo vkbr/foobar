@@ -2,21 +2,20 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import CreateProject from '../components/CreateProject';
-
+import { closeModal } from '../reducers/modal';
 import {
-	addProjectTaskSuggestion,
-	toggleSuggestedTaskSelection,
-	updateTempProjectData,
+	addProject,
+	updateTempData,
 } from '../reducers/projects';
 
 const mapStateToProps = state => ({
-	tempCreateProjectData: state.projects.tempCreateProjectData,
+	tempData: state.projects.tempData,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-	addProjectTaskSuggestion,
-	toggleSuggestedTaskSelection,
-	updateTempProjectData,
+	addProject,
+	closeModal,
+	updateTempData,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateProject);

@@ -1,4 +1,5 @@
 import React from 'react';
+import { remote } from 'electron';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
 
@@ -7,14 +8,32 @@ import ProjectList from './ProjectList';
 
 import './Sidebar.scss';
 
-const Sidebar = ({ toggleContentMode, uiMode }) => (
+const Sidebar = ({ openModal, uiMode, projects, updateTempData }) => (
 	<div className="sidebar">
 		<h2 className="sidebar-heading">
 			<span className="sidebar-heading__text">Projects</span>
-			{console.log(uiMode, MODES.CREATE)}
 			<IconButton
 				className="add-project"
-				onClick={() => toggleContentMode()}
+				onClick={() => {
+					let pwd = remote
+						.dialog
+						.showOpenDialog({ properties: ['openDirectory'] });
+
+					if (pwd === undefined) {
+						return;
+					} else {
+						pwd = pwd[0];
+					}
+
+					const projectName = pwd
+						.split(/\//g)
+						.slice(-1)[0]
+						.replace(/[^a-zA-Z\d]+/g, ' ')
+						.replace(/^[a-zA-Z\d]/, $1 => $1.toUpperCase());
+
+					updateTempData({ pwd, projectName });
+					openModal('PROJECT_CREATE_BASIC');
+				}}
 				style={
 					uiMode === MODES.CREATE ?
 						{transform: 'rotate(45deg)'} :
@@ -24,7 +43,7 @@ const Sidebar = ({ toggleContentMode, uiMode }) => (
 				<AddIcon />
 			</IconButton>
 		</h2>
-		<ProjectList />
+		<ProjectList projects={projects} />
 	</div>
 );
 
