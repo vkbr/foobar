@@ -1,5 +1,6 @@
 import React from 'react';
 import { remote } from 'electron';
+import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
 
@@ -8,8 +9,15 @@ import ProjectList from './ProjectList';
 
 import './Sidebar.scss';
 
-const Sidebar = ({ openModal, uiMode, projects, updateTempData }) => (
-	<div className="sidebar">
+const Sidebar = ({
+	openModal,
+	projects,
+	selectedProjectId,
+	selectProject,
+	uiMode,
+	updateTempData,
+}) => (
+	<Paper className="standard-paper sidebar">
 		<h2 className="sidebar-heading">
 			<span className="sidebar-heading__text">Projects</span>
 			<IconButton
@@ -43,8 +51,12 @@ const Sidebar = ({ openModal, uiMode, projects, updateTempData }) => (
 				<AddIcon />
 			</IconButton>
 		</h2>
-		<ProjectList projects={projects} />
-	</div>
+		<ProjectList
+			selectedProjectId={selectedProjectId}
+			selectProject={selectProject}
+			projects={projects}
+		/>
+	</Paper>
 );
 
 export default Sidebar;
