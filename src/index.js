@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 // setConfig({ logLevel: 'debug' });
 
 import createStore from './createStore';
+import UserStore from './utils/UserStore';
 import './styles/main.scss';
 
 import App from './containers/App';
@@ -19,8 +20,12 @@ import App from './containers/App';
 // 	);
 // })
 
+const store = createStore();
+
+UserStore.subscribe(store);
+
 render(
-	<Provider store={createStore()}>
+	<Provider store={store}>
 		<App />
 	</Provider>,
 	document.getElementById('root')

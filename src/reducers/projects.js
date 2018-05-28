@@ -3,21 +3,22 @@ import uuidv4 from 'uuid/v4';
 import path from 'path';
 import fs from '../utils/fs-promise';
 
+import { PROJECT_STORE_KEY } from '../constants/keys';
 import { project } from '../schemas/project';
 import { stat } from 'fs';
 
 const UPDATE_PROJECT_TEMP_DATA = 'PRO/PROJECT/UPDATE_TEMP_DATA';
 const ADD_PROJECT = 'PRO/PROJECT/ADD';
 const UPDATE_SELECTED_PROJECT = 'PRO/PROJECT/UPDATE_SELECT';
-const PROJECT_PATH = 'project.json';
 
-const allProjectsSaved = localStorage.getItem(PROJECT_PATH) || '[]';
+const allProjectsSaved = localStorage.getItem(PROJECT_STORE_KEY) || '[]';
 let projectsJson = [];
 
 try {
 	projectsJson = JSON.parse(allProjectsSaved);
 } catch (e) {}
 
+const hasProject = projectsJson.length > 0;
 const normalizedProject = normalize(projectsJson, [project]);
 
 const initialState = {
@@ -25,7 +26,7 @@ const initialState = {
 	byId: normalizedProject.entities.project || {},
 	tasks: normalizedProject.entities.tasks || {},
 	isLoaded: true,
-	selectedId: null,
+	selectedId: hasProject ? projectsJson[0].id : null,
 	tempData: {
 		pwd: '',
 		projectName: '',
