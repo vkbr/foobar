@@ -1,7 +1,7 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
 
-import AnimZoomIn from './common/AnimZoomIn';
+import AnimZoomIn from './AnimZoomIn';
 import './ContentWrapper.scss';
 
 const ContentWrapper = ({ heading, children, wrapperClassName = '' }) => (

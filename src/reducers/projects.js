@@ -9,6 +9,7 @@ import { stat } from 'fs';
 
 const UPDATE_PROJECT_TEMP_DATA = 'PRO/PROJECT/UPDATE_TEMP_DATA';
 const ADD_PROJECT = 'PRO/PROJECT/ADD';
+const UPDATE_PROJECT = 'PRO/PROJECT/UPDATE';
 const UPDATE_SELECTED_PROJECT = 'PRO/PROJECT/UPDATE_SELECT';
 
 const allProjectsSaved = localStorage.getItem(PROJECT_STORE_KEY) || '[]';
@@ -52,6 +53,17 @@ function reducer(state = initialState, action) {
 				}
 			};
 		}
+		case UPDATE_PROJECT: {
+			const { project } = action;
+
+			return {
+				...state,
+				byId: {
+					...state.byId,
+					[project.id]: project,
+				}
+			};
+		}
 		case UPDATE_PROJECT_TEMP_DATA:
 			return {
 				...state,
@@ -91,6 +103,11 @@ export const addProject = (data) => {
 		project,
 	};
 };
+
+export const updateProject = project => ({
+	project,
+	type: UPDATE_PROJECT,
+});
 
 export const selectProject = projectId => ({
 	projectId,
