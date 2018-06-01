@@ -4,7 +4,7 @@ import path from 'path';
 import fs from '../utils/fs-promise';
 
 import { PROJECT_STORE_KEY } from '../constants/keys';
-import { project } from '../schemas/project';
+import { project as projectSchema } from '../schemas/project';
 import { stat } from 'fs';
 
 const UPDATE_PROJECT_TEMP_DATA = 'PRO/PROJECT/UPDATE_TEMP_DATA';
@@ -20,7 +20,7 @@ try {
 } catch (e) {}
 
 const hasProject = projectsJson.length > 0;
-const normalizedProject = normalize(projectsJson, [project]);
+const normalizedProject = normalize(projectsJson, [projectSchema]);
 
 const initialState = {
 	allIds: normalizedProject.result,
@@ -38,7 +38,7 @@ const initialState = {
 function reducer(state = initialState, action) {
 	switch (action.type) {
 		case ADD_PROJECT: {
-			const normalizedProject = normalize(action.project, project);
+			const normalizedProject = normalize(action.project, projectSchema);
 			return {
 				...state,
 				allIds: state.allIds.concat(normalizedProject.result),
@@ -50,7 +50,7 @@ function reducer(state = initialState, action) {
 				tasks: {
 					...state.tasks,
 					...normalizedProject.entities.task,
-				}
+				},
 			};
 		}
 		case UPDATE_PROJECT: {
@@ -61,7 +61,7 @@ function reducer(state = initialState, action) {
 				byId: {
 					...state.byId,
 					[project.id]: project,
-				}
+				},
 			};
 		}
 		case UPDATE_PROJECT_TEMP_DATA:
@@ -70,7 +70,7 @@ function reducer(state = initialState, action) {
 				tempData: {
 					...state.tempData,
 					...action.data,
-				}
+				},
 			};
 		case UPDATE_SELECTED_PROJECT:
 			return {
@@ -84,7 +84,7 @@ function reducer(state = initialState, action) {
 
 export default reducer;
 
-export const getAllProjects = ({ projects: { allIds, byId }}) =>
+export const getAllProjects = ({ projects: { allIds, byId } }) =>
 	allIds.map(id => byId[id]);
 
 export const updateTempData = data => ({
@@ -92,7 +92,7 @@ export const updateTempData = data => ({
 	data,
 });
 
-export const addProject = (data) => {
+export const addProject = data => {
 	const project = {
 		id: uuidv4(),
 		...data,
