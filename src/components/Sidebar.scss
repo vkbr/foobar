@@ -1,9 +1,9 @@
-@import "../styles/theme";
+@import '../styles/theme';
 
 .sidebar {
 	background: white;
 	padding: 0;
-	
+
 	width: 250px;
 
 	display: flex;
@@ -17,10 +17,10 @@
 .sidebar-heading {
 	margin: 0;
 	padding: 20px;
-	font-size: 1.4em;
-	
+	font-size: 1.2em;
+
 	display: flex;
-	
+
 	color: $primary-color;
 
 	&__text {
