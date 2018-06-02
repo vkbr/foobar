@@ -29,19 +29,26 @@ const ProjectViewer = ({ selectedProject, updateProject }) => {
 		>
 			<Paper className="standard-paper">
 				<div>
-					<FolderNameDisplay>{selectedProject.pwd}</FolderNameDisplay>
-					<IconButton
-						onClick={() => {
-							const pwd = remote.dialog.showOpenDialog({
-								properties: ['openDirectory'],
-							});
-							if (pwd !== undefined) {
-								updateTempProjectData({ pwd });
-							}
-						}}
+					<FolderNameDisplay
+						action={
+							<IconButton
+								onClick={() => {
+									const pwd = remote.dialog.showOpenDialog({
+										properties: ['openDirectory'],
+									});
+									if (pwd !== undefined) {
+										updateTempProjectData({ pwd });
+									}
+								}}
+							>
+								<FolderOpen />
+							</IconButton>
+						}
 					>
-						<FolderOpen />
-					</IconButton>
+						{selectedProject.pwd}
+						{/* /homa/vivek/hoola/boola/hakoona/matata/lets/make/this/longer/and try/to break/stuff */}
+						{/* /homa/vivek/hoola/longer/and try/to break/stuff */}
+					</FolderNameDisplay>
 				</div>
 			</Paper>
 		</ContentWrapper>
