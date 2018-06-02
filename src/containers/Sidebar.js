@@ -2,9 +2,14 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { getAllProjects, selectProject, updateTempData } from '../reducers/projects';
 import { openModal } from '../reducers/modal';
 import Sidebar from '../components/Sidebar';
+import {
+	deleteProject,
+	getAllProjects,
+	selectProject,
+	updateTempData
+} from '../reducers/projects';
 
 const mapStateToProps = state => ({
 	uiMode: state.ui.mode,
@@ -13,6 +18,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
+	deleteProject,
 	openModal,
 	selectProject,
 	updateTempData,

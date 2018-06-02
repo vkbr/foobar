@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Sidebar from './Sidebar';
 import Content from './Content';
 import Modal from './Modals';
+import Snackbar from './Snackbar';
 
 import './App.scss';
 
@@ -13,6 +14,7 @@ const App = () => (
 		<Sidebar />
 		<Content />
 		<Modal />
+		<Snackbar />
 	</div>
 );
 

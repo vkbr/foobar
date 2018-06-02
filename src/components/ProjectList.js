@@ -1,6 +1,9 @@
 import React from 'react';
+import DeleteOutline from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 
 import AnimZoomIn from './common/AnimZoomIn';
 import { PRIMARY } from '../constants/colors';
@@ -16,7 +19,12 @@ const styles = {
 	}
 };
 
-const ProjectList = ({ projects, selectedProjectId, selectProject }) => {
+const ProjectList = ({
+	deleteProject,
+	projects,
+	selectedProjectId,
+	selectProject,
+}) => {
 	const noProject = projects.length === 0;
 
 	return (
@@ -28,13 +36,19 @@ const ProjectList = ({ projects, selectedProjectId, selectProject }) => {
 					{projects.map(({id, name}) => (
 						<ListItem
 							button
+							className="project-list__item"
 							key={id}
 							style={id === selectedProjectId ? styles.selectedListItem : styles.baseListItem}
 							onClick={() => selectProject(id)}
 						>
-							<AnimZoomIn>
+							<AnimZoomIn >
 								{name}
 							</AnimZoomIn>
+							<ListItemSecondaryAction className="project-action-item">
+								<IconButton onClick={() => deleteProject(id)}>
+									<DeleteOutline />
+								</IconButton>
+							</ListItemSecondaryAction>
 						</ListItem>
 					))}
 				</List>

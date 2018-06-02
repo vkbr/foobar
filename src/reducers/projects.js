@@ -1,15 +1,17 @@
 import { normalize } from 'normalizr';
 import uuidv4 from 'uuid/v4';
 import path from 'path';
-import fs from '../utils/fs-promise';
+import { stat } from 'fs';
 
 import { PROJECT_STORE_KEY } from '../constants/keys';
 import { project as projectSchema } from '../schemas/project';
-import { stat } from 'fs';
+import { showShackbar } from './snackbar';
+import fs from '../utils/fs-promise';
 
 const UPDATE_PROJECT_TEMP_DATA = 'PRO/PROJECT/UPDATE_TEMP_DATA';
 const ADD_PROJECT = 'PRO/PROJECT/ADD';
 const UPDATE_PROJECT = 'PRO/PROJECT/UPDATE';
+const DELETE_PROJECT = 'PRO/PROJECT/DELETE';
 const UPDATE_SELECTED_PROJECT = 'PRO/PROJECT/UPDATE_SELECT';
 
 const allProjectsSaved = localStorage.getItem(PROJECT_STORE_KEY) || '[]';
@@ -64,6 +66,33 @@ function reducer(state = initialState, action) {
 				},
 			};
 		}
+		case DELETE_PROJECT: {
+			const { projectId } = action;
+			const { allIds, byId } = state;
+			let { selectedId } = state;
+			const selectedIdAt = allIds.indexOf(selectedId);
+			const projectCount = allIds.length;
+
+			if (selectedId === projectId) {
+				if (allIds.length < 2) {
+					selectedId = null;
+				} else if (selectedIdAt === projectCount - 1) {
+					selectedId = allIds[projectCount - 2];
+				} else {
+					selectedId = allIds[selectedIdAt + 1];
+				}
+			}
+
+			return {
+				...state,
+				selectedId,
+				byId: {
+					...byId,
+					[projectId]: undefined,
+				},
+				allIds: allIds.filter(id => id !== projectId),
+			};
+		}
 		case UPDATE_PROJECT_TEMP_DATA:
 			return {
 				...state,
@@ -108,6 +137,25 @@ export const updateProject = project => ({
 	project,
 	type: UPDATE_PROJECT,
 });
+
+export const deleteProject = projectId => (dispatch, getState) => {
+	const projectToDelete =  getState().projects.byId[projectId];
+
+	dispatch({
+		projectId,
+		type: DELETE_PROJECT,
+	});
+
+	dispatch(showShackbar({
+		message: 'Deleted',
+		actionText: 'UNDO',
+		action: () => {
+			dispatch(
+				addProject(projectToDelete)
+			);
+		}
+	}));
+}
 
 export const selectProject = projectId => ({
 	projectId,

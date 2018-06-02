@@ -10,6 +10,7 @@ import ProjectList from './ProjectList';
 import './Sidebar.scss';
 
 const Sidebar = ({
+	deleteProject,
 	openModal,
 	projects,
 	selectedProjectId,
@@ -52,6 +53,7 @@ const Sidebar = ({
 			</IconButton>
 		</h2>
 		<ProjectList
+			deleteProject={deleteProject}
 			selectedProjectId={selectedProjectId}
 			selectProject={selectProject}
 			projects={projects}

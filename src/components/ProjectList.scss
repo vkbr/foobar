@@ -1,5 +1,7 @@
 @import "../styles/theme";
 
+$delete-hover-transform: scale3d(1,1,1) translateY(-50%);
+
 .project-list-wrapper {
 	flex: 1;
 	position: relative;
@@ -21,4 +23,18 @@
 .project-list {
 	padding: 0;
 	margin: 0;
+	
+	.project-action-item:hover {
+		transform: $delete-hover-transform;
+	}
+	&__item {
+		& + .project-action-item {
+			transform: scale3d(0,0,0) translateY(-50%);
+			transition: transform 0.3s ease-out;
+		}
+
+		&:hover + .project-action-item {
+			transform: $delete-hover-transform;
+		}
+	}
 }
