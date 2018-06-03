@@ -3,6 +3,7 @@ import FolderOpen from '@material-ui/icons/FolderOpen';
 import ContentWrapper from './common/ContentWrapper';
 import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField';
 
 import FolderNameDisplay from './common/FolderNameDisplay';
 import './ProjectViewer.scss';
@@ -46,10 +47,12 @@ const ProjectViewer = ({ selectedProject, updateProject }) => {
 						}
 					>
 						{selectedProject.pwd}
-						{/* /homa/vivek/hoola/boola/hakoona/matata/lets/make/this/longer/and try/to break/stuff */}
-						{/* /homa/vivek/hoola/longer/and try/to break/stuff */}
 					</FolderNameDisplay>
 				</div>
+				<h3 className="project-task-headding">
+					<span className="project-task-headding__text">Tasks</span>
+					<TextField/>
+				</h3>
 			</Paper>
 		</ContentWrapper>
 	);
