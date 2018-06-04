@@ -1,5 +1,8 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import Transition from 'react-transition-group/Transition';
+
+import { children } from '../../constants/propDefinitions';
 
 const duration = 150;
 
@@ -21,6 +24,11 @@ const stateStyles = {
 };
 
 class AnimZoomIn extends PureComponent {
+	propTypes = {
+		// eslint-disable-next-line react/forbid-prop-types
+		style: PropTypes.object,
+		children: children.isRequired,
+	};
 	state = {
 		in: false,
 	};

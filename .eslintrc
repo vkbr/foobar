@@ -1,7 +1,11 @@
 {
 	"root": true,
-	"extends": ["airbnb"],
-	"plugins": ["react"],
+	"extends": [
+		"airbnb"
+	],
+	"plugins": [
+		"react"
+	],
 	"parserOptions": {
 		"ecmaVersion": 6,
 		"sourceType": "module",
@@ -18,9 +22,26 @@
 	},
 	"parser": "babel-eslint",
 	"rules": {
+		"consistent-return": 0,
 		"no-tabs": 0,
 		"no-shadow": 0,
 		"no-plusplus": 0,
+		"complexity": [
+			1,
+			10
+		],
+		"max-len": [
+			"error",
+			120
+		],
+		"react/jsx-indent": [
+			1,
+			"tab"
+		],
+		"react/jsx-indent-props": [
+			1,
+			"tab"
+		],
 		"comma-dangle": [
 			"error",
 			"always-multiline",
@@ -28,7 +49,6 @@
 				"functions": "never"
 			}
 		],
-		"max-len": ["error", 120],
 		"indent": [
 			"error",
 			"tab",
@@ -36,21 +56,30 @@
 				"SwitchCase": 1
 			}
 		],
-		"complexity": [1, 15],
-		"react/jsx-indent": [1, "tab"],
-		"react/jsx-indent-props": [1, "tab"],
-		"react/jsx-filename-extension": [
-			1,
-			{
-				"extensions": [".js", ".jsx"]
-			}
-		],
 		"jsx-a11y/anchor-is-valid": [
 			"error",
 			{
-				"components": ["Link"],
-				"specialLink": ["hrefLeft", "hrefRight"],
-				"aspects": ["noHref", "invalidHref", "preferButton"]
+				"components": [
+					"Link"
+				],
+				"specialLink": [
+					"hrefLeft",
+					"hrefRight"
+				],
+				"aspects": [
+					"noHref",
+					"invalidHref",
+					"preferButton"
+				]
+			}
+		],
+		"react/jsx-filename-extension": [
+			1,
+			{
+				"extensions": [
+					".js",
+					".jsx"
+				]
 			}
 		]
 	},

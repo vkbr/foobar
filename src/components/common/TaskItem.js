@@ -1,24 +1,22 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
 import AnimZoomIn from './AnimZoomIn';
 import './TaskItem.scss';
 
 class TaskItem extends PureComponent {
-
 	handleSelect() {
-		const {
-			onSelectChange,
-		} = this.props;
+		const { onSelectChange } = this.props;
 
 		if (!this.props.selectable) {
 			return false;
 		}
 
-		onSelectChange && onSelectChange();
+		if (typeof onSelectChange === 'function') onSelectChange();
 	}
 
 	render() {
-		const { name, cmd, selectable } = this.props;
+		const { name, cmd } = this.props;
 
 		return (
 			<AnimZoomIn
@@ -30,8 +28,22 @@ class TaskItem extends PureComponent {
 					<div>{cmd}</div>
 				</div>
 			</AnimZoomIn>
-		)
+		);
 	}
+}
+
+TaskItem.propTypes = {
+	cmd: PropTypes.string.isRequired,
+	name: PropTypes.string.isRequired,
+	onSelectChange: PropTypes.func,
+	selectable: PropTypes.bool,
+	selected: PropTypes.bool,
+};
+
+TaskItem.defaultProps = {
+	onSelectChange: null,
+	selectable: false,
+	selected: false,
 };
 
 export default TaskItem;
