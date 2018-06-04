@@ -13,10 +13,12 @@ function createWindow() {
 	if (isDev) {
 		const installExtension = require('electron-devtools-installer');
 
-		installExtension.default(installExtension.REDUX_DEVTOOLS)
-    .then((name) => console.log(`Added Extension:  ${name}`))
-    .catch((err) => console.log('An error occurred: ', err));
+		installExtension
+			.default(installExtension.REDUX_DEVTOOLS)
+			.then(name => console.log(`Added Extension:  ${name}`))
+			.catch(err => console.log('An error occurred: ', err));
 		win.webContents.openDevTools();
+		hello();
 	}
 
 	win.setMenu(null);
@@ -55,7 +57,7 @@ if (process.env.NODE_ENV !== 'production') {
 		path.resolve('./electron-build'),
 		{ encoding: 'buffer' },
 		decounce((eventType, filename) => {
-			console.log("RELOADING", Date.now());
+			console.log('RELOADING', Date.now());
 			win && win.reload();
 		}, 50)
 	);

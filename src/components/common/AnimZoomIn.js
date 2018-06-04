@@ -6,7 +6,7 @@ const duration = 150;
 const defaultStyle = {
 	opacity: 0,
 	transform: 'scale3d(0.8,0.8,0.8)',
-	transition: `all ${duration}ms ease-out`
+	transition: `all ${duration}ms ease-out`,
 };
 
 const stateStyles = {
@@ -16,8 +16,8 @@ const stateStyles = {
 	},
 	entered: {
 		opacity: 1,
-		transform: 'scale3d(1,1,1)'
-	}
+		transform: 'scale3d(1,1,1)',
+	},
 };
 
 class AnimZoomIn extends PureComponent {
@@ -28,16 +28,11 @@ class AnimZoomIn extends PureComponent {
 		const { style, children, ...restProp } = this.props;
 
 		return (
-			<Transition
-				in={this.state.in}
-				timeout={{enter: duration}}
-			>
+			<Transition in={this.state.in} timeout={{ enter: duration }}>
 				{state => (
 					<div
 						ref={el => el && this.setState({ in: true })}
-						style={
-								{...defaultStyle, ...stateStyles[state], ...style}
-						}
+						style={{ ...defaultStyle, ...stateStyles[state], ...style }}
 						{...restProp}
 					>
 						{children}
