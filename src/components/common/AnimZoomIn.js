@@ -24,11 +24,15 @@ const stateStyles = {
 };
 
 class AnimZoomIn extends PureComponent {
-	propTypes = {
+	static propTypes = {
 		// eslint-disable-next-line react/forbid-prop-types
 		style: PropTypes.object,
 		children: children.isRequired,
 	};
+	static defaultProps = {
+		style: {},
+	};
+
 	state = {
 		in: false,
 	};

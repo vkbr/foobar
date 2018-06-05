@@ -5,4 +5,11 @@ export const children = PropTypes.oneOfType([
 	PropTypes.arrayOf(PropTypes.node),
 ]);
 
-export const version = '1.0';
+export const project = PropTypes.shape({
+	id: PropTypes.string.isRequired,
+	name: PropTypes.string.isRequired,
+	pwd: PropTypes.string,
+	tasks: PropTypes.arrayOf(PropTypes.string),
+});
+
+export const projects = PropTypes.arrayOf(project);

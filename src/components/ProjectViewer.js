@@ -1,10 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { remote } from 'electron';
 import FolderOpen from '@material-ui/icons/FolderOpen';
-import ContentWrapper from './common/ContentWrapper';
 import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
-import TextField from '@material-ui/core/TextField';
+import SearchIcon from '@material-ui/icons/Search';
+import Input from '@material-ui/core/Input';
 
+import { project as ProjectDefinition } from '../constants/propDefinitions';
+import ContentWrapper from './common/ContentWrapper';
 import FolderNameDisplay from './common/FolderNameDisplay';
 import './ProjectViewer.scss';
 
@@ -19,7 +23,7 @@ const ProjectViewer = ({ selectedProject, updateProject }) => {
 				<input
 					className="project-editable-name"
 					value={selectedProject.name}
-					onChange={e => {
+					onChange={(e) => {
 						updateProject({
 							...selectedProject,
 							name: e.target.value,
@@ -38,7 +42,10 @@ const ProjectViewer = ({ selectedProject, updateProject }) => {
 										properties: ['openDirectory'],
 									});
 									if (pwd !== undefined) {
-										updateTempProjectData({ pwd });
+										updateProject({
+											...selectedProject,
+											pwd: pwd[0],
+										});
 									}
 								}}
 							>
@@ -51,11 +58,26 @@ const ProjectViewer = ({ selectedProject, updateProject }) => {
 				</div>
 				<h3 className="project-task-headding">
 					<span className="project-task-headding__text">Tasks</span>
-					<TextField/>
+					<Input
+						endAdornment={
+							<SearchIcon
+								style={{ color: '#ccc' }}
+							/>
+						}
+					/>
 				</h3>
 			</Paper>
 		</ContentWrapper>
 	);
+};
+
+ProjectViewer.propTypes = {
+	selectedProject: ProjectDefinition,
+	updateProject: PropTypes.func.isRequired,
+};
+
+ProjectViewer.defaultProps = {
+	selectedProject: null,
 };
 
 export default ProjectViewer;

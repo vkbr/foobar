@@ -1,4 +1,3 @@
-import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -8,7 +7,7 @@ import {
 	deleteProject,
 	getAllProjects,
 	selectProject,
-	updateTempData
+	updateTempData,
 } from '../reducers/projects';
 
 const mapStateToProps = state => ({

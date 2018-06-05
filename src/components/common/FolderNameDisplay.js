@@ -29,7 +29,7 @@ const FolderNameDisplay = ({
 };
 
 FolderNameDisplay.propTypes = {
-	action: PropTypes.func,
+	action: children,
 	children: children.isRequired,
 	folder: children,
 	className: PropTypes.string,

@@ -1,12 +1,9 @@
 import { normalize } from 'normalizr';
 import uuidv4 from 'uuid/v4';
-import path from 'path';
-import { stat } from 'fs';
 
 import { PROJECT_STORE_KEY } from '../constants/keys';
 import { project as projectSchema } from '../schemas/project';
 import { showShackbar } from './snackbar';
-import fs from '../utils/fs-promise';
 
 const UPDATE_PROJECT_TEMP_DATA = 'PRO/PROJECT/UPDATE_TEMP_DATA';
 const ADD_PROJECT = 'PRO/PROJECT/ADD';
@@ -121,7 +118,7 @@ export const updateTempData = data => ({
 	data,
 });
 
-export const addProject = data => {
+export const addProject = (data) => {
 	const project = {
 		id: uuidv4(),
 		...data,
@@ -139,7 +136,7 @@ export const updateProject = project => ({
 });
 
 export const deleteProject = projectId => (dispatch, getState) => {
-	const projectToDelete =  getState().projects.byId[projectId];
+	const projectToDelete = getState().projects.byId[projectId];
 
 	dispatch({
 		projectId,
@@ -150,12 +147,10 @@ export const deleteProject = projectId => (dispatch, getState) => {
 		message: 'Deleted',
 		actionText: 'UNDO',
 		action: () => {
-			dispatch(
-				addProject(projectToDelete)
-			);
-		}
+			dispatch(addProject(projectToDelete));
+		},
 	}));
-}
+};
 
 export const selectProject = projectId => ({
 	projectId,

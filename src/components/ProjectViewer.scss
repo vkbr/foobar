@@ -12,9 +12,11 @@
 
 .project-task-headding {
 	display: flex;
+	font-weight: normal;
 	margin-top: $spacing-normal;
 
 	&__text {
 		flex: 1;
+		font-weight: bold;
 	}
 }

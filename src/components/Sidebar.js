@@ -1,10 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { remote } from 'electron';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
 
 import { MODES } from '../reducers/ui';
+import { projects as ProjectsDef } from '../constants/propDefinitions';
 import ProjectList from './ProjectList';
 
 import './Sidebar.scss';
@@ -15,7 +17,6 @@ const Sidebar = ({
 	projects,
 	selectedProjectId,
 	selectProject,
-	uiMode,
 	updateTempData,
 }) => (
 	<Paper className="standard-paper sidebar">
@@ -30,9 +31,9 @@ const Sidebar = ({
 
 					if (pwd === undefined) {
 						return;
-					} else {
-						pwd = pwd[0];
 					}
+
+					[pwd] = pwd;
 
 					const projectName = pwd
 						.split(/\//g)
@@ -43,11 +44,6 @@ const Sidebar = ({
 					updateTempData({ pwd, projectName });
 					openModal('PROJECT_CREATE_BASIC');
 				}}
-				style={
-					uiMode === MODES.CREATE ?
-						{transform: 'rotate(45deg)'} :
-						null
-				}
 			>
 				<AddIcon />
 			</IconButton>
@@ -60,5 +56,19 @@ const Sidebar = ({
 		/>
 	</Paper>
 );
+
+Sidebar.propTypes = {
+	deleteProject: PropTypes.func.isRequired,
+	openModal: PropTypes.func.isRequired,
+	projects: ProjectsDef,
+	selectedProjectId: PropTypes.string,
+	selectProject: PropTypes.func.isRequired,
+	updateTempData: PropTypes.func.isRequired,
+};
+
+Sidebar.defaultProps = {
+	projects: [],
+	selectedProjectId: null,
+};
 
 export default Sidebar;
