@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import path from 'path';
+import os from 'os';
 
 import { children } from '../../constants/propDefinitions';
 import './FolderNameDisplay.scss';
 
+const HOME_DIR = os.homedir();
 const seperator = path.sep;
 const pathSep = new RegExp(seperator, 'g');
 
@@ -18,7 +20,7 @@ const FolderNameDisplay = ({
 
 	return (
 		<div className={`folder-name-display ${className}`} direction="rtl">
-			<span>{pathSplit.slice(0, -1).join(seperator)}</span>
+			<span>{pathSplit.slice(0, -1).join(seperator).replace(HOME_DIR, '~')}</span>
 			<span className="folder-name-display__divider">{seperator}</span>
 			<span className="folder-name-display__last-part">
 				{pathSplit.slice(-1).join('')}
