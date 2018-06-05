@@ -5,7 +5,6 @@ import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
 
-import { MODES } from '../reducers/ui';
 import { projects as ProjectsDef } from '../constants/propDefinitions';
 import ProjectList from './ProjectList';
 
