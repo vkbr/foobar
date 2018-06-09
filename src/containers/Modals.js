@@ -1,13 +1,13 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import Dialog from '@material-ui/core/Dialog';
 
-import CreateProject from './CreateProject';
+import CreateTaskModal from './CreateTaskModal';
 import './Modals.scss';
 
 const modalContainers = {
-	PROJECT_CREATE_BASIC: CreateProject,
-}; 
+	CREATE_TASK: CreateTaskModal,
+};
 
 const Modal = ({ isOpen, contentKey, modalProps }) => {
 	const Content = modalContainers[contentKey];
@@ -21,7 +21,7 @@ const Modal = ({ isOpen, contentKey, modalProps }) => {
 			<Content {...modalProps} />
 		</Dialog>
 	);
-}
+};
 
 const mapStateToProps = state => state.modal;
 

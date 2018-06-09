@@ -7,9 +7,13 @@ import Paper from '@material-ui/core/Paper';
 import SearchIcon from '@material-ui/icons/Search';
 import Input from '@material-ui/core/Input';
 
-import { project as ProjectDefinition } from '../constants/propDefinitions';
+import {
+	project as ProjectDefinition,
+	project,
+} from '../constants/propDefinitions';
 import ContentWrapper from './common/ContentWrapper';
 import FolderNameDisplay from './common/FolderNameDisplay';
+import ProjectTasks from '../containers/ProjectTasks';
 import './ProjectViewer.scss';
 
 const ProjectViewer = ({ selectedProject, updateProject }) => {
@@ -23,12 +27,12 @@ const ProjectViewer = ({ selectedProject, updateProject }) => {
 				<input
 					className="project-editable-name"
 					value={selectedProject.name}
-					onChange={(e) => {
+					onChange={e =>
 						updateProject({
 							...selectedProject,
 							name: e.target.value,
-						});
-					}}
+						})
+					}
 				/>
 			}
 		>
@@ -56,16 +60,7 @@ const ProjectViewer = ({ selectedProject, updateProject }) => {
 						{selectedProject.pwd}
 					</FolderNameDisplay>
 				</div>
-				<h3 className="project-task-headding">
-					<span className="project-task-headding__text">Tasks</span>
-					<Input
-						endAdornment={
-							<SearchIcon
-								style={{ color: '#ccc' }}
-							/>
-						}
-					/>
-				</h3>
+				<ProjectTasks projectId={selectedProject.id} />
 			</Paper>
 		</ContentWrapper>
 	);
