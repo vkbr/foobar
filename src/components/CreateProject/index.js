@@ -6,19 +6,24 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import TextField from '@material-ui/core/TextField';
 
-const CreateProject = ({ addProject, closeModal, tempData, updateTempData }) => (
+const CreateProject = ({
+	addProject,
+	closeModal,
+	tempData,
+	updateTempData,
+}) => (
 	<Fragment>
 		<DialogContent>
 			<TextField
 				label="Give project a name"
-				style={{maxWidth: '100%', width: 200}}
+				style={{ maxWidth: '100%', width: 200 }}
 				value={tempData.projectName}
 				onChange={e => updateTempData({ projectName: e.target.value })}
 			/>
 		</DialogContent>
 		<DialogActions>
 			<Button
-				onClick={(e) => {
+				onClick={() => {
 					closeModal();
 					addProject({
 						pwd: tempData.pwd,
@@ -26,7 +31,9 @@ const CreateProject = ({ addProject, closeModal, tempData, updateTempData }) => 
 						tasks: [],
 					});
 				}}
-			>Create Project</Button>
+			>
+				Create Project
+			</Button>
 		</DialogActions>
 	</Fragment>
 );

@@ -4,7 +4,7 @@ import PlayArrow from '@material-ui/icons/PlayArrow';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Tooltip from '@material-ui/core/Tooltip';
 
 import AnimZoomIn from './common/AnimZoomIn';
@@ -20,7 +20,7 @@ const styles = {
 		paddingRight: 96,
 		borderRight: `2px solid ${PRIMARY}`,
 		color: PRIMARY,
-	}
+	},
 };
 
 const ProjectList = ({
@@ -37,17 +37,19 @@ const ProjectList = ({
 				<div className="no-project-info">No project added yet.</div>
 			) : (
 				<List className="project-list" component="nav">
-					{projects.map(({id, name}) => (
+					{projects.map(({ id, name }) => (
 						<ListItem
 							button
 							className="project-list__item"
 							key={id}
-							style={id === selectedProjectId ? styles.selectedListItem : styles.baseListItem}
+							style={
+								id === selectedProjectId
+									? styles.selectedListItem
+									: styles.baseListItem
+							}
 							onClick={() => selectProject(id)}
 						>
-							<AnimZoomIn >
-								{name}
-							</AnimZoomIn>
+							<AnimZoomIn>{name}</AnimZoomIn>
 							<ListItemSecondaryAction className="project-action-item">
 								<Tooltip title="Start all tasks">
 									<IconButton>
