@@ -22,8 +22,6 @@ try {
 const hasProject = projectsJson.length > 0;
 const normalizedProject = normalize(projectsJson, [projectSchema]);
 
-console.log(normalizedProject);
-
 const initialState = {
 	allIds: normalizedProject.result,
 	byId: normalizedProject.entities.project || {},
