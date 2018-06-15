@@ -10,6 +10,7 @@ const ADD_PROJECT = 'PRO/PROJECT/ADD';
 const UPDATE_PROJECT = 'PRO/PROJECT/UPDATE';
 const DELETE_PROJECT = 'PRO/PROJECT/DELETE';
 const UPDATE_SELECTED_PROJECT = 'PRO/PROJECT/UPDATE_SELECT';
+const ADD_PROJECT_TASK = 'PRO/PROJECT/CREATE_TASK';
 
 const allProjectsSaved = localStorage.getItem(PROJECT_STORE_KEY) || '[]';
 let projectsJson = [];
@@ -21,10 +22,12 @@ try {
 const hasProject = projectsJson.length > 0;
 const normalizedProject = normalize(projectsJson, [projectSchema]);
 
+console.log(normalizedProject);
+
 const initialState = {
 	allIds: normalizedProject.result,
 	byId: normalizedProject.entities.project || {},
-	tasks: normalizedProject.entities.tasks || {},
+	tasksById: normalizedProject.entities.task || {},
 	isLoaded: true,
 	selectedId: hasProject ? projectsJson[0].id : null,
 	tempData: {
@@ -46,20 +49,29 @@ function reducer(state = initialState, action) {
 					...state.byId,
 					...normalizedProject.entities.project,
 				},
-				tasks: {
-					...state.tasks,
+				tasksById: {
+					...state.tasksById,
 					...normalizedProject.entities.task,
 				},
 			};
 		}
-		case UPDATE_PROJECT: {
-			const { project } = action;
+		case ADD_PROJECT_TASK: {
+			const { projectId, task } = action;
+			const project = state.byId[projectId];
+			const nextTask = { ...task, id: uuidv4() };
 
 			return {
 				...state,
 				byId: {
 					...state.byId,
-					[project.id]: project,
+					[projectId]: {
+						...project,
+						tasks: [...project.tasks, nextTask.id],
+					},
+				},
+				tasksById: {
+					...state.tasksById,
+					[nextTask.id]: nextTask,
 				},
 			};
 		}
@@ -90,6 +102,17 @@ function reducer(state = initialState, action) {
 				allIds: allIds.filter(id => id !== projectId),
 			};
 		}
+		case UPDATE_PROJECT: {
+			const { project } = action;
+
+			return {
+				...state,
+				byId: {
+					...state.byId,
+					[project.id]: project,
+				},
+			};
+		}
 		case UPDATE_PROJECT_TEMP_DATA:
 			return {
 				...state,
@@ -118,7 +141,7 @@ export const updateTempData = data => ({
 	data,
 });
 
-export const addProject = (data) => {
+export const addProject = data => {
 	const project = {
 		id: uuidv4(),
 		...data,
@@ -143,16 +166,24 @@ export const deleteProject = projectId => (dispatch, getState) => {
 		type: DELETE_PROJECT,
 	});
 
-	dispatch(showShackbar({
-		message: 'Deleted',
-		actionText: 'UNDO',
-		action: () => {
-			dispatch(addProject(projectToDelete));
-		},
-	}));
+	dispatch(
+		showShackbar({
+			message: 'Deleted',
+			actionText: 'UNDO',
+			action: () => {
+				dispatch(addProject(projectToDelete));
+			},
+		})
+	);
 };
 
 export const selectProject = projectId => ({
 	projectId,
 	type: UPDATE_SELECTED_PROJECT,
+});
+
+export const createProjectTask = (projectId, task) => ({
+	projectId,
+	task,
+	type: ADD_PROJECT_TASK,
 });

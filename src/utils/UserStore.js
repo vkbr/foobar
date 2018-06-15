@@ -1,9 +1,7 @@
-import { addProject } from '../reducers/projects';
 import { PROJECT_STORE_KEY } from '../constants/keys';
 
 let store;
 let timeout;
-
 
 function onData(afterTimeout) {
 	if (!afterTimeout) {
@@ -13,15 +11,18 @@ function onData(afterTimeout) {
 	}
 
 	const { projects } = store.getState();
+	const { tasksById } = projects;
 
 	const allProjects = projects.allIds.map(id => projects.byId[id]);
+
+	allProjects.forEach(project => {
+		project.tasks = (project.tasks || []).map(taskId => tasksById[taskId]);
+	});
 
 	localStorage.setItem(PROJECT_STORE_KEY, JSON.stringify(allProjects));
 }
 
-function restoreData() {
-
-}
+function restoreData() {}
 
 export default {
 	subscribe(source) {
@@ -30,5 +31,5 @@ export default {
 		restoreData();
 
 		store.subscribe(onData);
-	}
+	},
 };

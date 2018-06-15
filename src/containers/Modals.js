@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 import Dialog from '@material-ui/core/Dialog';
 
 import CreateTaskModal from './CreateTaskModal';
+import CreateProject from './CreateProject';
 import './Modals.scss';
 
 const modalContainers = {
 	CREATE_TASK: CreateTaskModal,
+	PROJECT_CREATE_BASIC: CreateProject,
 };
 
 const Modal = ({ isOpen, contentKey, modalProps }) => {

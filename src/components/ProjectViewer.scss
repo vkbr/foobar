@@ -1,4 +1,4 @@
-@import "../styles/theme";
+@import '../styles/theme';
 
 .project-editable-name {
 	background: transparent;
@@ -18,5 +18,10 @@
 	&__text {
 		flex: 1;
 		font-weight: bold;
+	}
+
+	> div {
+		display: flex;
+		align-items: center;
 	}
 }
