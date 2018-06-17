@@ -3,10 +3,14 @@ import PropTypes from 'prop-types';
 import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
 import SearchIcon from '@material-ui/icons/Search';
 import AddIcon from '@material-ui/icons/Add';
 
-const ProjectTasks = ({ openModal, projectId }) => (
+const ProjectTasks = ({ openModal, projectId, tasks }) => (
 	<div className="project-tasks">
 		<h3 className="project-task-headding">
 			<span className="project-task-headding__text">
@@ -23,6 +27,18 @@ const ProjectTasks = ({ openModal, projectId }) => (
 				}
 			/>
 		</h3>
+		<List>
+			{
+				tasks.map(task => (
+					<ListItem key={task.id}>
+						<ListItemText
+							primary={task.name}
+							secondary={task.cmd}
+						/>
+					</ListItem>
+				))
+			}
+		</List>
 	</div>
 );
 

@@ -4,6 +4,14 @@ import { bindActionCreators } from 'redux';
 import ProjectTasks from '../components/ProjectTasks';
 import { openModal } from '../reducers/modal';
 
+const mapStateToProps = (state, ownProps) => {
+	const { projects: { byId, tasksById } } = state;
+
+	return {
+		tasks: byId[ownProps.projectId].tasks.map(taskId => tasksById[taskId]),
+	};
+};
+
 const mapDispatchToProps = dispatch =>
 	bindActionCreators(
 		{
@@ -13,6 +21,6 @@ const mapDispatchToProps = dispatch =>
 	);
 
 export default connect(
-	null,
+	mapStateToProps,
 	mapDispatchToProps
 )(ProjectTasks);

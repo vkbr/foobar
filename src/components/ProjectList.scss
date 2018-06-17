@@ -29,8 +29,8 @@ $delete-hover-transform: scale3d(1,1,1) translateY(-50%);
 	}
 	&__item {
 		& + .project-action-item {
-			transform: scale3d(0,0,0) translateY(-50%);
-			transition: transform 0.3s ease-out;
+			transform: scale3d(0,0,0) translateY(-100%);
+			transition: all 0.3s ease-out;
 		}
 
 		&:hover + .project-action-item {

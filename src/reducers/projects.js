@@ -1,9 +1,11 @@
 import { normalize } from 'normalizr';
+import path from 'path';
 import uuidv4 from 'uuid/v4';
 
 import { PROJECT_STORE_KEY } from '../constants/keys';
 import { project as projectSchema } from '../schemas/project';
 import { showShackbar } from './snackbar';
+import fs from '../utils/fs-promise';
 
 const UPDATE_PROJECT_TEMP_DATA = 'PRO/PROJECT/UPDATE_TEMP_DATA';
 const ADD_PROJECT = 'PRO/PROJECT/ADD';
@@ -17,7 +19,7 @@ let projectsJson = [];
 
 try {
 	projectsJson = JSON.parse(allProjectsSaved);
-} catch (e) {}
+} catch (e) { }
 
 const hasProject = projectsJson.length > 0;
 const normalizedProject = normalize(projectsJson, [projectSchema]);
@@ -57,6 +59,11 @@ function reducer(state = initialState, action) {
 			const { projectId, task } = action;
 			const project = state.byId[projectId];
 			const nextTask = { ...task, id: uuidv4() };
+
+			// console.log(
+			// 	[...project.tasks, nextTask.id],
+			// 	JSON.parse(JSON.stringify(nextTask))
+			// );
 
 			return {
 				...state,
@@ -139,17 +146,39 @@ export const updateTempData = data => ({
 	data,
 });
 
-export const addProject = data => {
+export const addProject = data => (dispatch) => {
+	const projectId = uuidv4();
 	const project = {
-		id: uuidv4(),
+		id: projectId,
 		...data,
 	};
 
-	return {
+	console.log("TASK for", data.pwd);
+	fs.readFile(path.join(data.pwd, 'package.json'), 'utf8')
+		.then((data) => {
+			const { scripts } = JSON.parse(data);
+
+			if (scripts !== undefined) {
+				Object
+					.keys(scripts)
+					.forEach(taskName => dispatch({
+						projectId,
+						task: {
+							name: taskName,
+							cmd: scripts[taskName],
+						},
+						type: ADD_PROJECT_TASK,
+					}));
+			}
+		});
+
+	dispatch({
 		type: ADD_PROJECT,
 		project,
-	};
+	});
 };
+
+
 
 export const updateProject = project => ({
 	project,
