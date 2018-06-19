@@ -13,3 +13,11 @@ export const project = PropTypes.shape({
 });
 
 export const projects = PropTypes.arrayOf(project);
+
+export const task = PropTypes.shape({
+	id: PropTypes.string.isRequired,
+	name: PropTypes.string,
+	cmd: PropTypes.string,
+});
+
+export const tasks = PropTypes.arrayOf(task);

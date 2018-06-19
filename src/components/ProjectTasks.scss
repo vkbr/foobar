@@ -1,0 +1,8 @@
+.project-tasks {
+	display: flex;
+	flex-direction: column;
+
+	.task-list-container {
+		overflow: auto;
+	}
+}
