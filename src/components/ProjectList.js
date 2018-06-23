@@ -51,11 +51,11 @@ const ProjectList = ({
 						>
 							<AnimZoomIn>{name}</AnimZoomIn>
 							<ListItemSecondaryAction className="project-action-item">
-								<Tooltip title="Start all tasks">
-									<IconButton>
-										<PlayArrow />
-									</IconButton>
-								</Tooltip>
+								{/* <Tooltip title="Start all tasks">
+				<IconButton>
+					<PlayArrow />
+				</IconButton>
+			</Tooltip> */}
 								<Tooltip title="Delete project">
 									<IconButton onClick={() => deleteProject(id)}>
 										<DeleteOutline />
