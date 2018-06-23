@@ -1,3 +1,23 @@
+@import '../styles/theme';
+
+.project-task-headding {
+	display: flex;
+	align-items: baseline;
+	font-weight: normal;
+	margin: 0;
+	padding: $spacing-normal 0;
+
+	&__text {
+		flex: 1;
+		font-weight: bold;
+	}
+
+	&__search {
+		display: flex;
+		align-items: center;
+	}
+}
+
 .project-tasks {
 	display: flex;
 	flex-direction: column;

@@ -15,10 +15,6 @@ import { tasks } from '../constants/propDefinitions';
 
 import './ProjectTasks.scss';
 
-const styles = {
-	searchIcon: { color: '#ccc' },
-};
-
 class ProjectTasks extends Component {
 	state = {
 		filter: '',
@@ -35,25 +31,27 @@ class ProjectTasks extends Component {
 		return (
 			<div className="project-tasks">
 				<h3 className="project-task-headding">
-					<span className="project-task-headding__text">
-						Tasks
+					<div className="project-task-headding__text">
+						<span>Tasks</span>
 						<IconButton onClick={() => openModal('CREATE_TASK', { projectId })}>
 							<AddIcon />
 						</IconButton>
-					</span>
+					</div>
 					<Input
+						className="project-task-headding__search"
 						onChange={e => this.setState({ filter: e.target.value })}
 						value={this.state.filter}
 						endAdornment={
 							<InputAdornment position="end">
-								{
-									this.state.filter === '' ?
-										<SearchIcon style={styles.searchIcon} /> :
-										<ClearIcon
-											style={styles.searchIcon}
-											onClick={() => this.setState({ filter: '' })}
-										/>
-								}
+								<IconButton disabled={this.state.filter === ''}>
+									{
+										this.state.filter === '' ?
+											<SearchIcon /> :
+											<ClearIcon
+												onClick={() => this.setState({ filter: '' })}
+											/>
+									}
+								</IconButton>
 							</InputAdornment>
 						}
 					/>

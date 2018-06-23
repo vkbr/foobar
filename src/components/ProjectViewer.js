@@ -36,7 +36,7 @@ const ProjectViewer = ({ selectedProject, updateProject }) => {
 				/>
 			}
 		>
-			<Paper className="standard-paper">
+			<Paper className="standard-paper project-viewer">
 				<div>
 					<FolderNameDisplay
 						action={
