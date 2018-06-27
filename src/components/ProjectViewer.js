@@ -4,13 +4,8 @@ import { remote } from 'electron';
 import FolderOpen from '@material-ui/icons/FolderOpen';
 import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
-import SearchIcon from '@material-ui/icons/Search';
-import Input from '@material-ui/core/Input';
 
-import {
-	project as ProjectDefinition,
-	project,
-} from '../constants/propDefinitions';
+import { project as ProjectDefinition } from '../constants/propDefinitions';
 import ContentWrapper from './common/ContentWrapper';
 import FolderNameDisplay from './common/FolderNameDisplay';
 import ProjectTasks from '../containers/ProjectTasks';

@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import AddIcon from '@material-ui/icons/Add';
 import ClearIcon from '@material-ui/icons/Clear';
 import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 // import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import SearchIcon from '@material-ui/icons/Search';
-import AddIcon from '@material-ui/icons/Add';
 
 import { tasks } from '../constants/propDefinitions';
+import TaskAction from './common/TaskAction';
 
 import './ProjectTasks.scss';
 
@@ -60,11 +63,14 @@ class ProjectTasks extends Component {
 					<List>
 						{
 							this.filterCmd(tasks).map(task => (
-								<ListItem key={task.id}>
+								<ListItem button key={task.id}>
 									<ListItemText
 										primary={task.name}
 										secondary={task.cmd}
 									/>
+									<ListItemSecondaryAction>
+										<TaskAction />
+									</ListItemSecondaryAction>
 								</ListItem>
 							))
 						}
